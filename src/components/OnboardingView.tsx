@@ -222,7 +222,7 @@ export default function OnboardingView({ onComplete, onOAuthStart }: OnboardingV
     setUrlError('');
     setConnecting(true);
     try {
-      const response = await fetch(`${trimmed}/api/`, { method: 'HEAD' });
+      const response = await fetch(`${trimmed}/api/`, { method: 'GET' });
       if (response.ok || response.status === 401) {
         // 401 is expected without auth — the server is reachable
         setHaUrl(trimmed);
