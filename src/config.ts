@@ -31,10 +31,14 @@ export function getConfig(): BeaconConfig {
   if (cached) return cached;
 
   const runtime = window.__BEACON_CONFIG__ ?? {};
+  
+  // In standalone mode, fall back to credentials saved during onboarding.
+  const storedHaUrl = localStorage.getItem('beacon_ha_url') ?? '';
+  const storedHaToken = localStorage.getItem('beacon_ha_token') ?? '';
 
   cached = {
-    ha_url: runtime.ha_url ?? import.meta.env.VITE_HA_URL ?? '',
-    ha_token: runtime.ha_token || import.meta.env.VITE_HA_TOKEN || '',
+    ha_url: runtime.ha_url || storedHaUrl || import.meta.env.VITE_HA_URL || '',
+    ha_token: runtime.ha_token || storedHaToken || import.meta.env.VITE_HA_TOKEN || '',
     family_name: runtime.family_name || import.meta.env.VITE_FAMILY_NAME || 'My Family',
     save_config_in_browser: runtime.save_config_in_browser ?? (import.meta.env.VITE_SAVE_CONFIG_IN_BROWSER !== 'false'),
     theme: runtime.theme || import.meta.env.VITE_THEME || 'skylight',
