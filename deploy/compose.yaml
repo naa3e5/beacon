@@ -1,0 +1,17 @@
+services:
+  beacon:
+    container_name: beacon
+    build:
+      context: ..
+      dockerfile: beacon/Dockerfile
+
+    restart: unless-stopped
+
+    ports:
+      - "3002:3000"
+
+    environment:
+      BEACON_DATA: /data
+
+    volumes:
+      - ./data:/data
