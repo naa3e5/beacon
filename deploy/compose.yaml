@@ -3,7 +3,7 @@ services:
     container_name: beacon
     build:
       context: ..
-      dockerfile: beacon/Dockerfile
+      dockerfile: Dockerfile
 
     restart: unless-stopped
 
